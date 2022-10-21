@@ -1,0 +1,41 @@
+# Creation de la base de données.
+
+# Commande docker à lancer pour placer la BDD. tennis => nom du conteneur. postgres = conteneur de type postgres, 123 password.
+# docker run --name tennis -e POSTGRES_DB=tennis -e POSTGRES_PASSWORD=123 -p 5432:5432 -d postgres
+server:
+  port: 8089
+
+# Datasource de type postgres.
+spring:
+  datasource:
+    platform: postgres
+    url: jdbc:postgresql://localhost:5432/tennis
+    username : postgres
+    password: 123
+  jpa:
+    hibernate:
+      ddl-auto: update
+      dialect: org.hibernate.dialect.PostgreSQLDialect
+      jdbc:
+        lob :
+          non_contextual_creation : true
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            client-id: 795460848938-au4m4vs44ncl9jj99tmq8r451olt0oe3.apps.googleusercontent.com
+            client-secret: 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
+
+# App Properties
+antoine:
+  app :
+    jwtSecret:  antoineSecretKey
+    jwtExpirationMs:  86400000
+
+
+
+  # Creation de la base de données, nom de la base = tennis.
+  # Username de la base de données = postgres.
+  # Password de la base de données = 123.
+  # Parametre permettant la mise à jour de la base de données lors de l'ajout de données.
